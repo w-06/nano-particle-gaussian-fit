@@ -5,10 +5,6 @@
 """
 
 import sys
-import io
-
-# 强制 UTF-8 输出
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 import streamlit as st
 import pandas as pd
