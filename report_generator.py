@@ -213,4 +213,4 @@ def generate_pdf_report(results, bar_fig, dist_fig, output_path=None):
         pdf.output(output_path)
         return output_path
     else:
-        return pdf.output()
+        return bytes(pdf.output())
