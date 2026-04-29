@@ -22,13 +22,23 @@ class FitReport(FPDF):
         self.set_auto_page_break(True, 20)
 
     def _setup_fonts(self):
-        """配置字体，优先使用系统中文字体"""
-        # Windows 常见中文字体路径
+        """配置字体，自动适配 Windows / Linux 系统中文字体"""
+        import glob
+
+        # 按优先级排列的字体候选列表 (路径模式, 字体名)
         font_candidates = [
+            # Windows
             ("C:/Windows/Fonts/simhei.ttf", "SimHei"),
             ("C:/Windows/Fonts/msyh.ttc", "MSYH"),
             ("C:/Windows/Fonts/simsun.ttc", "SimSun"),
+            # Linux — Noto CJK (fonts-noto-cjk)
+            ("/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc", "NotoCJK"),
+            ("/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc", "NotoCJK"),
+            # Linux — WenQuanYi (fonts-wqy-zenhei)
+            ("/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc", "WenQuanYi"),
+            ("/usr/share/fonts/wenquanyi/wqy-zenhei/wqy-zenhei.ttc", "WenQuanYi"),
         ]
+
         font_added = False
         for path, name in font_candidates:
             if os.path.exists(path):
@@ -40,6 +50,32 @@ class FitReport(FPDF):
                     break
                 except Exception:
                     continue
+
+        # 如果固定路径都找不到，用 glob 搜索常见字体目录
+        if not font_added:
+            search_dirs = [
+                "/usr/share/fonts", "/usr/local/share/fonts",
+                "C:/Windows/Fonts",
+            ]
+            for search_dir in search_dirs:
+                if not os.path.isdir(search_dir):
+                    continue
+                for fp in glob.glob(os.path.join(search_dir, "**/*"), recursive=True):
+                    if not fp.lower().endswith((".ttf", ".ttc", ".otf")):
+                        continue
+                    fname = os.path.basename(fp).lower()
+                    # 匹配中文字体特征名
+                    if any(kw in fname for kw in ["cjk", "hei", "song", "ming", "kai", "noto", "wqy", "wenquan", "simhei", "msyh", "simsun"]):
+                        try:
+                            self.add_font("CJKFont", "", fp, uni=True)
+                            self.add_font("CJKFont", "B", fp, uni=True)
+                            self.font_name = "CJKFont"
+                            font_added = True
+                            break
+                        except Exception:
+                            continue
+                if font_added:
+                    break
 
         if not font_added:
             self.font_name = "Helvetica"
