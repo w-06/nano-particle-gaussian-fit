@@ -1,0 +1,33 @@
+# Python 虚拟环境
+.venv/
+venv/
+env/
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Claude Code 本地配置
+.claude/
+
+# 输出文件（运行时生成）
+*.png
+*.pdf
+
+# 临时文件/无关文件
+*.jpg
+*.jpeg
