@@ -17,7 +17,7 @@
 
 ## 🚀 在线使用
 
-> 🌐 **在线地址：** [点击使用](https://你的应用名.streamlit.app) *(部署后更新)*
+> 🌐 **在线地址：** [https://nano-particle-gaussian-fit.streamlit.app](https://nano-particle-gaussian-fit.streamlit.app)
 
 无需安装任何软件，浏览器打开即可使用。
 
@@ -41,8 +41,8 @@ Excel 文件需满足以下格式之一：
 ### 1. 克隆仓库
 
 ```bash
-git clone https://github.com/你的用户名/纳米材料粒径高斯拟合曲线.git
-cd 纳米材料粒径高斯拟合曲线
+git clone https://github.com/w-06/nano-particle-gaussian-fit.git
+cd nano-particle-gaussian-fit
 ```
 
 ### 2. 创建虚拟环境并安装依赖
