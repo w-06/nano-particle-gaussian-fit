@@ -3,6 +3,7 @@
 > 一款面向纳米材料研究领域的高斯拟合曲线在线工具，用于处理纳米材料粒径（DLS）实验数据，支持直接读取 Excel 表格完成拟合计算，一键导出拟合曲线图片和 PDF 报告。
 
 [![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white)](https://streamlit.io)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat&logo=python)](https://python.org)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
@@ -20,6 +21,21 @@
 > 🌐 **在线地址：** [https://nano-particle-gaussian-fit.streamlit.app](https://nano-particle-gaussian-fit.streamlit.app)
 
 无需安装任何软件，浏览器打开即可使用。
+
+## 🔌 RESTful API
+
+项目同时提供 FastAPI 后端接口，支持程序化调用和系统集成：
+
+| 方法 | 路径 | 说明 |
+|------|------|------|
+| `POST` | `/api/v1/fit` | 上传 Excel 并执行高斯拟合 |
+| `GET` | `/api/v1/fit` | 历史分析记录列表（分页） |
+| `GET` | `/api/v1/fit/{id}` | 单条记录拟合详情 |
+| `GET` | `/api/v1/fit/{id}/report/pdf` | 下载 PDF 报告 |
+| `GET` | `/api/v1/fit/{id}/chart/bar` | 下载柱状图 PNG |
+| `GET` | `/api/v1/fit/{id}/chart/distribution` | 下载分布曲线 PNG |
+
+启动 API 服务后访问 `/docs` 即可查看 Swagger 交互式文档。
 
 ## 📸 功能截图
 
@@ -55,20 +71,33 @@ pip install -r requirements.txt
 
 ### 3. 启动应用
 
+**Web 界面（Streamlit）：**
+
 ```bash
 streamlit run app.py
 ```
 
 浏览器打开 `http://localhost:8501` 即可使用。
 
+**API 服务（FastAPI）：**
+
+```bash
+uvicorn api.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+浏览器打开 `http://localhost:8000/docs` 查看 Swagger API 文档。
+
 ## 🛠 技术栈
 
 | 组件 | 技术 |
 |------|------|
-| Web 框架 | [Streamlit](https://streamlit.io) |
+| Web 框架 | [Streamlit](https://streamlit.io) + [FastAPI](https://fastapi.tiangolo.com) |
 | 科学计算 | NumPy, SciPy, Pandas |
+| ORM | SQLAlchemy (SQLite) |
+| 数据校验 | Pydantic |
 | 数据可视化 | Matplotlib |
 | PDF 生成 | fpdf2 |
+| API 文档 | Swagger UI / ReDoc（自动生成） |
 | 部署平台 | Streamlit Community Cloud |
 
 ## 📄 拟合模型
