@@ -31,3 +31,6 @@ Thumbs.db
 # 临时文件/无关文件
 *.jpg
 *.jpeg
+
+# API 数据库文件
+data/
