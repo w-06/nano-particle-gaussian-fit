@@ -27,6 +27,9 @@ Thumbs.db
 # 输出文件（运行时生成）
 *.png
 *.pdf
+# 例外：assets/ 目录中的截图和文档图片
+!assets/*.png
+!assets/*.pdf
 
 # 临时文件/无关文件
 *.jpg

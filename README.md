@@ -39,8 +39,7 @@
 
 ## 📸 功能截图
 
-![Uploading image.png…]()
-
+![拟合结果页面](assets/screenshot_fit_result.png)
 
 ## 📊 数据格式说明
 
