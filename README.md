@@ -38,8 +38,8 @@
 启动 API 服务后访问 `/docs` 即可查看 Swagger 交互式文档。
 
 ## 📸 功能截图
+![Uploading 屏幕截图 2026-07-24 002931.png…]()
 
-![拟合结果页面](assets/screenshot_fit_result.png)
 
 ## 📊 数据格式说明
 
